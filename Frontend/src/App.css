@@ -1,0 +1,78 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Background and Main Container */
+.MainDiv {
+    width: 100vw;
+    height: 100vh;
+    position: relative; /* For positioning child elements */
+    overflow: hidden;   /* Prevent content overflow */
+}
+
+.BackgroundImage {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('https://t3.ftcdn.net/jpg/02/92/57/14/360_F_292571491_R01YTzyvuceDL3UujKe7z38awUeUwtnD.jpg');
+    background-size: cover; /* Ensure the background fits the screen */
+    background-repeat: repeat-x; /* Repeat the background horizontally */
+    background-position: 0 0; /* Start at the top-left corner */
+  }
+  
+
+/* Character and Objects */
+.dog {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    z-index: 10;
+    cursor: pointer;
+    outline: none; /* Remove focus outline for better UX */
+}
+
+.Car {
+    height: 100px;
+    width: 200px;
+    position: absolute;
+    z-index: 10;
+    transition: left 0.1s linear; /* Smooth car movement */
+}
+
+/* Game Over Message */
+.GameOverMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: xxx-large;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: black;
+    z-index: 20;
+    text-align: center;
+}
+
+/* Restart Button */
+.Restart {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 20;
+}
+
+.Restart:hover {
+    background-color: #e0e0e0; /* Add hover effect */
+}
