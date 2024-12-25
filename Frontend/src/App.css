@@ -76,3 +76,21 @@ body, html {
 .Restart:hover {
     background-color: #e0e0e0; /* Add hover effect */
 }
+
+.Score{
+    position: absolute;
+    top:20%;
+    left: 40%;
+    font-size: xx-large;
+    font-weight: 600;
+    
+}
+
+.Win{
+    position: absolute;
+    top:40%;
+    left: 40%;
+    font-size: xx-large;
+    font-weight: 600;
+    
+}

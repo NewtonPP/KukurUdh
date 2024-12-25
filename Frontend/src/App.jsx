@@ -4,7 +4,7 @@ import './App.css';
 const App = () => {
   const [Position, setPosition] = useState({ top: 350, left: 0 });
   const [isMoving, setIsMoving] = useState(true);
-  const [CarPosition, setCarPosition] = useState({ left: 1200, top: 350 });
+  const [CarPosition, setCarPosition] = useState({ left: 1400, top: 350 });
   const [isCarPaused, setIsCarPaused] = useState(false);
   const [isCrashed, setIsCrashed] = useState(false);
 
@@ -14,7 +14,7 @@ const App = () => {
       interval = setInterval(() => {
         setPosition((prev) => ({
           ...prev,
-          left: prev.left + 10 < window.innerWidth - 100 ? prev.left + 10 : prev.left,
+          left: prev.left + 10 < window.innerWidth-100 ? prev.left + 2 : prev.left,
         }));
       }, 100);
     }
@@ -30,7 +30,7 @@ const App = () => {
       interval = setInterval(() => {
         setCarPosition((prev) => ({
           ...prev,
-          left: prev.left - 20,
+          left: prev.left - 50,
         }));
       }, 100);
     }
@@ -40,8 +40,8 @@ const App = () => {
   }, [isCarPaused]);
 
   useEffect(() => {
-    if (CarPosition.left <= 0) {
-      setCarPosition((prev) => ({ ...prev, left: 1200 }));
+    if (CarPosition.left <= -300) {
+      setCarPosition((prev) => ({ ...prev, left: 1400 }));
     }
   }, [CarPosition.left]);
 
@@ -56,12 +56,27 @@ const App = () => {
   }, [Position, CarPosition]);
 
   const Jump = () => {
-    setPosition((prev) => ({ ...prev, top: 200, left: prev.left + 50 }));
+    setPosition((prev) => ({ ...prev, top: 200, left: prev.left  }));
 
     setTimeout(() => {
-      setPosition((prev) => ({ ...prev, top: 350 }));
+      setPosition((prev) => ({ ...prev, top: 350, left:prev.left + 2}));
+      console.log(CarPosition)
+      console.log(Position)
+     
     }, 500);
+
+  
   };
+
+  const [Score, setScore] = useState(0);
+
+  useEffect(()=>{
+    if(!isCrashed &&  Position.left - CarPosition.left > 200 && Position.left - CarPosition.left < 250){
+      setScore((prev)=>prev+1)
+  }
+},[Position])
+
+  
 
   const HandleCarCrash = () => {
     setIsCrashed(true);
@@ -89,14 +104,35 @@ const App = () => {
     setIsCrashed(false)
     setIsMoving(true)
     setIsCarPaused(false)
+    setScore(0)
 
   }
+ 
+  useEffect(()=>{
+
+    if (Position.left === window.innerWidth-100){
+      setIsCarPaused(true)
+      setIsMoving(false)
+    }
+  
+  },[Position])
+    
+ 
   return (
     <div className="MainDiv">
-      <img
-        src="https://t3.ftcdn.net/jpg/02/92/57/14/360_F_292571491_R01YTzyvuceDL3UujKe7z38awUeUwtnD.jpg"
+      <div
         className="BackgroundImage"
       />
+      <div className='Score'>Your current score: {Score}</div>
+      {
+        Position.left === window.innerWidth-100 ?( 
+        
+        <div className='Win'>
+          <div>You win this game</div> 
+          <div>You scored: {Score}</div>
+          </div>
+        ):""
+      }
       <img
         src="https://www.freeiconspng.com/thumbs/car-png/red-sports-car-ferrari-png-23.png"
         className="Car"
@@ -113,7 +149,7 @@ const App = () => {
       <div className='GameOverMessage'>Car got crashed, Game Over</div>
       <button onClick={
         HandleRestart
-      } className='Restart'> Restart?</button>
+      } className='Restart'>Restart?</button>
       </div>
       }
     </div>
